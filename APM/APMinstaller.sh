@@ -202,7 +202,7 @@ echo "<VirtualHost *:80>
 
 # vim: syntax=apache ts=4 sw=4 sts=4 sr noet " > /etc/apache2/sites-available/000-default.conf
 
-cd /root/UAAI/APM
+cd /UAAI/APM
 
 wget http://www.maxmind.com/download/geoip/api/c/GeoIP.tar.gz
 tar -xzvf GeoIP.tar.gz
@@ -318,15 +318,15 @@ mkdir /etc/apache2/logs/
 
 chmod 707 /etc/skel/public_html
 
-chmod 700 /root/UAAI/adduser.sh
+chmod 700 /UAAI/adduser.sh
 
-chmod 700 /root/UAAI/deluser.sh
+chmod 700 /UAAI/deluser.sh
 
-chmod 700 /root/UAAI/restart.sh
+chmod 700 /UAAI/restart.sh
 
-chmod 700 /root/UAAI/clamav.sh
+chmod 700 /UAAI/clamav.sh
 
-cp /root/UAAI/APM/skel/index.html /etc/skel/public_html/
+cp /UAAI/APM/skel/index.html /etc/skel/public_html/
 
 systemctl restart apache2
 
@@ -364,7 +364,7 @@ default-character-set = utf8mb4" > /etc/mysql/mysql.conf.d/mysql-aai.cnf
 #                                        #
 ##########################################
 
-cd /root/UAAI/APM
+cd /UAAI/APM
 
 #chkrootkit 설치
 apt-get -y install chkrootkit
@@ -448,17 +448,17 @@ systemctl restart apache2
 #                                        #
 ##########################################
 
-mv /root/UAAI/APM/etc/cron.daily/backup /etc/cron.daily/
-mv /root/UAAI/APM/etc/cron.daily/check_chkrootkit /etc/cron.daily/
-mv /root/UAAI/APM/etc/cron.daily/letsencrypt-renew /etc/cron.daily/
+mv /UAAI/APM/etc/cron.daily/backup /etc/cron.daily/
+mv /UAAI/APM/etc/cron.daily/check_chkrootkit /etc/cron.daily/
+mv /UAAI/APM/etc/cron.daily/letsencrypt-renew /etc/cron.daily/
 
 chmod 700 /etc/cron.daily/backup
 chmod 700 /etc/cron.daily/check_chkrootkit
 chmod 700 /etc/cron.daily/letsencrypt-renew
 
-echo "00 20 * * * /root/cron.daily/check_chkrootkit" >> /etc/crontab
+echo "00 20 * * * /cron.daily/check_chkrootkit" >> /etc/crontab
 echo "01 02,14 * * * /etc/cron.daily/letsencrypt-renew" >> /etc/crontab
-echo "01 01 * * 7 /root/UAAI/clamav.sh" >> /etc/crontab
+echo "01 01 * * 7 /UAAI/clamav.sh" >> /etc/crontab
 
 #openssl 로 디피-헬만 파라미터(dhparam) 키 만들기 둘중 하나 선택
 #openssl dhparam -out /etc/ssl/certs/dhparam.pem 4096
@@ -495,9 +495,9 @@ sed -i '/; End:/i\zend_extension = /usr/lib/php/ioncube/ioncube_loader_lin_7.2.s
 sed -i '/; End:/i\zend_extension = /usr/lib/php/ioncube/ioncube_loader_lin_7.3.so' /etc/php/7.3/fpm/php.ini
 
 #중요 폴더 및 파일 링크
-ln -s /etc/letsencrypt /root/UAAI/letsencrypt
-ln -s /etc/apache2 /root/UAAI/apache2
-ln -s /etc/mysql/conf.d/mysql.cnf /root/UAAI/mysql.cnf
+ln -s /etc/letsencrypt /UAAI/letsencrypt
+ln -s /etc/apache2 /UAAI/apache2
+ln -s /etc/mysql/conf.d/mysql.cnf /UAAI/mysql.cnf
 
 systemctl restart php5.6-fpm
 systemctl restart php7.0-fpm
@@ -513,7 +513,7 @@ systemctl enable php7.2-fpm
 systemctl enable php7.3-fpm
 systemctl enable php7.4-fpm
 
-cd /root/UAAI
+cd /UAAI
 
 systemctl restart apache2
 
@@ -524,13 +524,13 @@ systemctl restart apache2
 #              cockpit 설치               #
 #                                        #
 ##########################################
-cd /root/UAAI
+cd /UAAI
 
 sudo apt -y install cockpit
 
 sudo systemctl start cockpit
 
-sh /root/UAAI/restart.sh
+sh /UAAI/restart.sh
 
 echo ""
 echo ""

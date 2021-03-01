@@ -117,8 +117,8 @@ echo '# deny file, folder start with dot
 
 ln -s /etc/apache2/conf-available/deny-apache2.conf /etc/apache2/conf-enabled/deny-apache2.conf
 
-cp /root/UAAI/APM/index.html /var/www/html/
-cp -f /root/UAAI/APM/index.html /usr/share/apache2/default-site/
+cp /UAAI/APM/index.html /var/www/html/
+cp -f /UAAI/APM/index.html /usr/share/apache2/default-site/
 
 apt-get -y install libapache2-mpm-itk
 
